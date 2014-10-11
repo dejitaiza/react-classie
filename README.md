@@ -16,27 +16,41 @@ $ npm install --save react-classie
 The API is still clunky now especially in the initialization part but that should be addressed in the next releases.
 
 ```javascript
+/** @jsx React.DOM */
+
 var React = require('react'),
     reactClassie = require('react-classie');
 
 var Component = React.createClass({
   mixins:[reactClassie],
   getInitialState: function(){
-    state = {
+    /* We initialize a namespaced class set
+     *
+     * All the class sets need to be initialized inside the _cs property
+     * in the component's state with a namespace as follows
+     */
+
+    var state = {
       _cs:{
-        component: this.getEmptyClassState('component')
+        myNamespace: this.getEmptyClassState('myNamespace')
       }
     }
     return state;
   },
   clickHandler: function(){
-   this.toggleClassName('active', this._cs.component);
+   //toggleClassName adds or remove a class to the specified class set
+   this.toggleClassName('active', this._cs.myNamespace);
   },
   render: function(){
-    return <div className={this.classesFor('component')} onClick={this.clickHandler}/>
+    //classesFor returns the class string
+    return <div className={this.classesFor('myNamespace')} onClick={this.clickHandler}/>
   }
 });
 
+React.renderComponent(
+  <Component />,
+  document.querySelector('.component')
+);
 ```
 
 ## API
