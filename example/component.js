@@ -14,7 +14,7 @@ var Component = React.createClass({
 
     var state = {
       _cs:{
-        myNamespace: this.getEmptyClassState('myNamespace')
+        myNamespace: this.emptyClassState('myNamespace')
       }
     }
     return state;
