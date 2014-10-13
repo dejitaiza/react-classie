@@ -41,6 +41,11 @@ gulp.task('bump', ['test'], function () {
     .pipe(gulp.dest('./'));
 });
 
+gulp.task('docs', function() {
+  return gulp.src('./lib/**/*.js')
+    .pipe(plugins.jsdoc('./docs'));
+});
+
 gulp.task('watch', ['test'], function () {
   gulp.watch(paths.watch, ['test']);
 });
